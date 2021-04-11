@@ -15,4 +15,6 @@ module.exports = (app) => {
 
   // Delete a Note with userId
   app.delete('/users/:userId', users.delete);
+
+  app.get('/login', users.login);
 };
