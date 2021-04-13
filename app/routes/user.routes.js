@@ -1,3 +1,5 @@
+const verifyToken = require('../controllers/VerifyToken');
+
 module.exports = (app) => {
   const users = require('../controllers/user.controllers');
 
@@ -8,13 +10,13 @@ module.exports = (app) => {
   app.get('/users', users.findAll);
 
   // Retrieve a single Note with noteId
-  app.get('/users/:userId', users.findOne);
+  app.get('/users/:userId', verifyToken, users.findOne);
 
   // Update a Note with userId
-  app.put('/users/:userId', users.update);
+  app.put('/users/:userId', verifyToken, users.update);
 
   // Delete a Note with userId
-  app.delete('/users/:userId', users.delete);
+  app.delete('/users/:userId', verifyToken, users.delete);
 
   app.get('/login', users.login);
 };

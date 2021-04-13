@@ -1,7 +1,7 @@
 var jwt = require('jsonwebtoken');
 var config = require('../../config/database.config');
 
-function verifyToken(req, res) {
+function verifyToken(req, res, next) {
   var token = req.headers['x-access-token'];
   if (!token)
     return res.status(403).send({ auth: false, message: 'No token provided.' });
@@ -14,6 +14,7 @@ function verifyToken(req, res) {
 
     // if everything good, save to request for use in other routes
     req.userId = decoded.id;
+    next();
   });
 }
 
